@@ -6,8 +6,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const { width, height } = Dimensions.get('window');
 
-export const words = [  
-  {"id":0, "cs":"pláž","en":"beach ", "pron":"/biːtʃ/" },  
+export const words = [
+  {"id":0, "cs":"pláž","en":"beach ", "pron":"/biːtʃ/" },
             {"id":1, "cs":"věřit","en":"believe ", "pron":"/bɪˈliːv/" },
             {"id":2, "cs":"jízdní kolo","en":"bike ", "pron":"/baɪk/" },
             {"id":3, "cs":"loď","en":"boat ", "pron":"/bəʊt/" },
@@ -77,9 +77,9 @@ export const Trenovat = () => {
     return currentWord.czech === options[0] ? 0 : 1
   }
 
-  const options = selectedOptionIndex === -1 ? 
+  const options = selectedOptionIndex === -1 ?
     [words[currentWordIndex].czech, ''] :
-    [selectedOptionIndex === 0 ? words[currentWordIndex].czech : words[currentWordIndex - 1].czech, 
+    [selectedOptionIndex === 0 ? words[currentWordIndex].czech : words[currentWordIndex - 1].czech,
      selectedOptionIndex === 1 ? words[currentWordIndex].czech : words[currentWordIndex - 1].czech]
      const [modalVisible, setModalVisible] = useState(false);
 
@@ -89,52 +89,57 @@ export const Trenovat = () => {
      }
   return (
     <View style={styles.container}>
-          <Modal visible={modalVisible}       animationType="slide"
-      transparent={true}>
-        <View style={{ width: '60%', height : '10%', position: 'absolute', top: '40%', left: '20%', backgroundColor: 'green', borderRadius: 10}}>
-          <Text style={{alignSelf: 'center', fontSize: 20}}>Správně!</Text>
-          <TouchableOpacity style={styles.tlacitko} onPress={() => setModalVisible(false)}>
-            <Text style={styles.texttlacitko}>Zavřít</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-      <Text style={styles.text}>Anglická slovíčka</Text>
-      {showResultPopup ? (
-        <View >
-          <Text >
-            {`Správně: ${correctAnswers} / ${words.length}`}
-          </Text>
-          <TouchableOpacity  onPress={handleRestartPress}>
-            <Text >Opakovat</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        <View >
-        
-          <Text >slovo</Text>
-          <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
-            <Text style={styles.texttlacitko} >preklad</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
-            <Text style={styles.texttlacitko}>preklad</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
-            <Text style={styles.texttlacitko}>preklad</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
-            <Text style={styles.texttlacitko}>preklad</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
-            <Text style={styles.texttlacitko} >preklad</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
-            <Text style={styles.texttlacitko} >preklad</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+  <Modal visible={modalVisible} animationType="slide" transparent={true}>
+    <View style={styles.VyjizdejiciKarta}>
+      <Text style={styles.Spravne}>Správně!</Text>
+      <Text style={styles.Spravne}>Slovíčko</Text>
+      <Text style={styles.Spravne}>/Výslovnost/</Text>
+      <Text style={styles.Spravne}>Překlad</Text>
+      <TouchableOpacity style={styles.tlacitko} onPress={() => setModalVisible(false)}>
+        <Text style={styles.texttlacitko}>Zavřít</Text>
+      </TouchableOpacity>
     </View>
+  </Modal>
+  <Text style={styles.text}>Anglická slovíčka</Text>
+  <Text style={styles.textLekce}>Lekce 1</Text>
+  <Text style={styles.textSlovicko}>Slovíčko</Text>
+  <Text style={styles.textVyslovnost}>/Výslovnost/</Text>
+  {showResultPopup ? (
+    <View>
+      <Text>{`Správně: ${correctAnswers} / ${words.length}`}</Text>
+      <TouchableOpacity onPress={handleRestartPress}>
+        <Text>Opakovat</Text>
+      </TouchableOpacity>
+    </View>
+  ) : (
+    <View style={styles.prekladContainer}>
+      <View style={styles.prekladColumn}>
+        <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
+          <Text style={styles.textPreklad}>Překlad</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
+          <Text style={styles.textPreklad}>Překlad</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
+          <Text style={styles.textPreklad}>Překlad</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.prekladColumn}>
+        <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
+          <Text style={styles.textPreklad}>Překlad</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
+          <Text style={styles.textPreklad}>Překlad</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tlacitko} onPress={() => handleClick()}>
+          <Text style={styles.textPreklad}>Překlad</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )}
+</View>
 
-    
+
     // <View style={styles.container}>
     //   {showResultPopup ? (
     //     <View style={styles.popupContainer}>
@@ -183,7 +188,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#ffff',
   },
-  text: { 
+  textPreklad: {
+    marginBottom: 10,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    backgroundColor: '#17181a',
+    borderRadius: 20,
+    borderWidth: 4,
+    borderColor: '#053286',
+    color: 'white',
+    textAlign: 'center',
+    marginHorizontal: 10,
+    fontSize: 40,
+  },
+  text: {
     color: '#ebecee',
     fontSize: height * 0.05,
     position: 'absolute',
@@ -191,5 +210,59 @@ const styles = StyleSheet.create({
     left: 0,
     paddingLeft: width * 0.05,
     marginTop: height * 0.02,
+  },
+  textLekce: {
+    color: '#ebecee',
+    fontSize: height * 0.03,
+    position: 'absolute',
+    top: 60,
+    left: 0,
+    paddingLeft: width * 0.05,
+    marginTop: height * 0.02,
+  },
+  textSlovicko: {
+    color: '#ebecee',
+    fontSize: height * 0.04,
+    position: 'absolute',
+    top: 90,
+    left: 0,
+    textAlign: 'center',
+    paddingLeft: width * 0.05,
+    marginTop: height * 0.02,
+  },
+  textVyslovnost: {
+    color: '#ebecee',
+    fontSize: height * 0.04,
+    position: 'absolute',
+    top: 90,
+    left: 0,
+    textAlign: 'center',
+    paddingLeft: width * 0.05,
+    marginTop: height * 0.02,
+  },
+  VyjizdejiciKarta: {
+    width: '60%',
+    height : '10%',
+    position: 'absolute',
+    top: '40%',
+    left: '20%',
+    backgroundColor: 'green',
+    borderRadius: 10
+  },
+  Spravne: {
+    alignSelf: 'center',
+    fontSize: 20
+  },
+  prekladContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    marginBottom: 80,
+  },
+  prekladColumn: {
+    flex: 1,
+    alignItems: 'center',
   },
 });

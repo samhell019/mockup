@@ -8,7 +8,7 @@ export const Card = () => {
 
   const navigation = useNavigation();
 
-  const handleStatsClick = () => {
+  const handleStats = () => {
     navigation.navigate('Stats');
   };
 
@@ -40,7 +40,7 @@ export const Card = () => {
     }
   }
   return <View style={styles.card}>
-    <Pressable style={styles.up} onPress={handleStatsClick}>
+    <Pressable style={styles.up} onPress={handleStats}>
     <View>
       <Text style={styles.nadpis}>Lekce 1</Text>
     </View>
@@ -115,6 +115,8 @@ const styles = StyleSheet.create({
     left: 20,
     frameColor: '#112449',
     backgroundColor: '#100c14',
+    borderWidth: 2, 
+    borderColor: '#053286', 
   },
   text2: {
     fontSize: 16,
